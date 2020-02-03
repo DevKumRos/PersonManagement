@@ -43,7 +43,9 @@ Create a file proxy-conf.json under project root folder
 ng build
 # Generate dist/personManagement folder copy the file from there & place in resoucre/static folder of springboot project 
 # Build SPringBoot application
+
 mvn clean install
+
 mvn spring-boot:run
 
 # Access application from this url http://localhost:9091/
