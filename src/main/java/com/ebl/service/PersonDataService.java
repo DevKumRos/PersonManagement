@@ -2,7 +2,7 @@ package com.ebl.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -54,7 +54,7 @@ public class PersonDataService {
 	public void updatePerson(PersonModel personModel) {
 		Person perDb = checkRecordExistInDB(personModel.getPersonId());
 		if(perDb != null) {
-			Person person = convertPersonModelToPerson(personModel);
+			Person person = convertPersonModelToPerson(personModel, perDb.getHobby());
 			person.setId(personModel.getPersonId());
 			personRepository.saveAndFlush(person);
 		}
@@ -91,8 +91,10 @@ public class PersonDataService {
 		}
 		return null;
 	}
-
 	private Person convertPersonModelToPerson(PersonModel personModel) {
+		return convertPersonModelToPerson(personModel, null);
+	}
+	private Person convertPersonModelToPerson(PersonModel personModel, List<Hobby> personHobbies) {
 		if(personModel != null ) {
 			Person person = new Person();
 			person.setFirst_name(personModel.getFirst_name());
@@ -101,11 +103,18 @@ public class PersonDataService {
 			person.setFavourite_colour(personModel.getFavourite_colour());
 			if(personModel.getHobby() != null) {
 				List<Hobby> hobbies = new ArrayList<>();
+				List<String> personHobbys = new ArrayList<>();
+				if(personHobbies != null) {
+					personHobbys = personHobbies.stream().map(hobby->hobby.getHobbyName()).collect(Collectors.toList());
+				}
 				for(String hobbyStr : personModel.getHobby()) {
-					Hobby hobby = new Hobby();
-					hobby.setHobbyName(hobbyStr);
-					hobby.setPerson(person);
-					hobbies.add(hobby);
+					if(!personHobbys.contains(hobbyStr)){
+						Hobby hobby = new Hobby();
+						hobby.setHobbyName(hobbyStr);
+						hobby.setPerson(person);
+						hobbies.add(hobby);
+					}
+					
 				}
 				person.setHobby(hobbies);	
 			}
