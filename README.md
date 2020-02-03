@@ -2,17 +2,17 @@
 Front End Implement using Angular version 8
 Backend Implement using JAVA 8, Spring Rest, Spring AOP for Logging
 
-#Running application follow below steps
+# Running application follow below steps
 clone application from below url
 https://github.com/DevKumRos/PersonManagement.git
 mvn clean install
 mvn spring-boot:run
-#We can access application with below url
+# We can access application with below url
 http://localhost:9091/
 No need to do any additional step for running angular code its already included in resouces/static folder
 
  
-#Way of Integrate Angular and Spring Boot
+# Way of Integrate Angular and Spring Boot
 Create a file proxy-conf.json under project root folder
 {
 	"/api":{
@@ -20,7 +20,7 @@ Create a file proxy-conf.json under project root folder
 	"secure": false
 	}
 }
-#Edit package.json file for start script:
+# Edit package.json file for start script:
 "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy-conf.json",
@@ -31,20 +31,20 @@ Create a file proxy-conf.json under project root folder
     "lint": "ng lint",
     "e2e": "ng e2e"
   }
-#Edit angular.json file with where destination folder should generate code, which we are going to copy to springboot application
+# Edit angular.json file with where destination folder should generate code, which we are going to copy to springboot application
 "options": {
             "outputPath": "dist/personManagement",
             "index": "src/index.html",
             "main": "src/main.ts", 
 
-#Build and Run Angular project seperatly with below commands and copy files from 
+# Build and Run Angular project seperatly with below commands and copy files from 
 # dist folder to resoucre/static folder of springboot project
 
 ng build
-#Generate dist/personManagement folder copy the file from there & place in resoucre/static folder of springboot project 
-#Build SPringBoot application
+# Generate dist/personManagement folder copy the file from there & place in resoucre/static folder of springboot project 
+# Build SPringBoot application
 mvn clean install
 mvn spring-boot:run
 
-#Access application from http://localhost:9091/
+# Access application from this url http://localhost:9091/
  
