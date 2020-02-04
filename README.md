@@ -37,8 +37,12 @@ Create a file proxy-conf.json under project root folder
             "index": "src/index.html",
             "main": "src/main.ts", 
 
-# Build and Run Angular project seperatly with below commands and copy files from 
-# dist folder to resoucre/static folder of springboot project
+# Build and Run Angular project seperatly with below commands and 
+npm install
+
+ng serve
+
+#To copy files from dist folder to resoucre/static folder of springboot project for that below commnad
 
 ng build
 # Generate dist/personManagement folder copy the file from there & place in resoucre/static folder of springboot project 
